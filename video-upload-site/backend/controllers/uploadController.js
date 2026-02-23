@@ -21,3 +21,17 @@ exports.addUpload = (req, res) => {
         });
     });
 };
+
+exports.getAllUploads = (req, res) => {
+
+    const sql = "SELECT * FROM uploads ORDER BY id DESC";
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "DB fetch failed" });
+        }
+
+        res.json(results);
+    });
+};
